@@ -10,6 +10,11 @@ def clean_data(data):
     #Remove Inactive users
     data["users"]= [user for user in data["users"]if user["friends"] or user["liked_pages"]]
     
+    # Remove duplicate pages
+    unique_pages={}
+    for page in data["pages"]:
+        unique_pages[page["id"]]=page
+    data["pages"]=list(unique_pages.values())
     return data
 
 #Load the data
